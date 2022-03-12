@@ -119,7 +119,7 @@ is what tells the motor what to do (tells the motor to rotate cw)
 First make sure that your arduino is connected to the computer via usb.
 Then make sure "Board:" is assigned to "'Arduino Uno'".
 Also make sure "Port" is set to:
-   PC: `COM3`
+   PC: `COM (Arduino Uno)`
    Mac: `/dev/cu.usbmodem14101`
    Linux: `dev/ttyACM0`
 
