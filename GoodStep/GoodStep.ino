@@ -136,3 +136,70 @@ void cwRotation(){
   }
   cwCount = 0;
 }
+
+/*
+#include "HX711.h"
+#define DOUT  A0
+#define CLK  A1
+HX711 scale;
+ 
+float calibration_factor = 200000; // this calibration factor must be adjusted according to your load cell
+float units;
+ 
+void setup() {
+ 
+  scale.begin(DOUT, CLK);
+  scale.set_scale(calibration_factor); //Adjust to this calibration factor
+  scale.tare();  //Reset the scale to 0
+  Serial.begin(9600);
+  Serial.println("HX711 calibration sketch");
+  Serial.println("Remove all weight from scale");
+  Serial.println("Press T to tare");
+  Serial.println("After readings begin, place known weight on scale");
+  Serial.println("Press + or a to increase calibration factor");
+  Serial.println("Press - or z to decrease calibration factor");
+ 
+ 
+ 
+  //  long zero_factor = scale.read_average(); //Get a baseline reading
+  //  Serial.print("Zero factor: "); //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
+  //  Serial.println(zero_factor);
+ 
+}
+ 
+void loop() {
+ 
+ 
+  Serial.print("Reading ");
+  units = scale.get_units(), 5;
+  if (units < 0)
+  {
+    units = 0.00;
+  }
+  Serial.print("Force: ");
+  Serial.print(units, 10);
+  Serial.print(" N");
+//  Serial.print(" calibration_factor: ");
+//  Serial.print(calibration_factor);
+  Serial.println();
+  delay(50);
+ 
+  // commands to type into serial monitor for calibration
+ 
+  if (Serial.available())
+  {
+    char temp = Serial.read(); //to adjust zero
+    if (temp == 't' || temp == 'T') //Type in
+      scale.tare();  //Resets the scale to zero
+  }
+
+ 
+  if (Serial.available())
+  {
+    char temp = Serial.read(); //to adjust calibration factor
+    if (temp == '+' || temp == 'a') //Type in
+      calibration_factor += 1;
+    else if (temp == '-' || temp == 'z') //Type in
+      calibration_factor -= 1;
+  }
+  */
