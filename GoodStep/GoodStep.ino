@@ -5,7 +5,17 @@ initialize the Stepper library on pins 8 through 11:
 Stepper myStepper(StepsPerRevolution, 8, 10, 9, 11);*/
 
 #include <Arduino.h> // Not needed if using standard Arduino IDE
+#include "HX711.h"
+#define DOUT  A0
+#define CLK  A1
 
+HX711 scale;
+
+// Load cell initialization
+float calibration_factor = 200000; // this calibration factor must be adjusted according to your load cell
+float units;
+
+// Motor initialization
 int motorPin1 = 8;
 int motorPin2 = 9;
 int motorPin3 = 10;
