@@ -2,7 +2,7 @@
 Code associated with the stepper motor and arduino
 
 
-** BACKGROUND INFO **
+## BACKGROUND INFO
 
 To run this code, you must first have the Arduino IDE downloaded onto 
 your machine.  If you're using the computer in Jack's lab near the 
@@ -12,7 +12,7 @@ If for some reason the Arduino IDE is not installed, use this link:
 https://www.arduino.cc/en/software
 
 
-** OPENING THE FILE **
+## OPENING THE FILE
 
 Double clicking on the file should automatically open the Arduino IDE.
 If this doesn't happen, click on the Arduino icon to manually open the IDE.
@@ -27,7 +27,7 @@ can edit/upload/verify the code.
 
 
 
-** UNDERSTANDING THE CODE **
+## UNDERSTANDING THE CODE
 
 Anything labelled `int` means it can be assigned to an integer
 Anything labelled `float` means it can be assigned to a float
@@ -114,7 +114,7 @@ is what tells the motor what to do (tells the motor to rotate cw)
 
 
 
-** SETTING UP THE BOARD/COMPUTER **
+## SETTING UP THE BOARD/COMPUTER
 
 First make sure that your arduino is connected to the computer via usb.
 Then make sure "Board:" is assigned to "'Arduino Uno'".
@@ -129,7 +129,7 @@ port, especially if you're unplugging and plugging back in the board a lot.
 
 
 
-** USING THE CODE **
+## USING THE CODE
 
 (IF MANUAL IS SET TO TRUE, SKIP STEP 1)
 1. Change the values of `ccwStep` and `cwStep` to the desired 
