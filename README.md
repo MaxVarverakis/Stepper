@@ -5,7 +5,7 @@ Code associated with the stepper motor and arduino
 ## Background Info
 
 To run this code, you must first have the Arduino IDE downloaded onto 
-your machine.  If you're using the computer in Jack's lab near the 
+your machine.  If you're using the computer in Jacks' lab near the 
 microscope (not the microscope computer), then it should already be 
 installed.  This code was written using Arduino version (1.8.15).
 If for some reason the Arduino IDE is not installed, use this link:
