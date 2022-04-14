@@ -2,7 +2,7 @@
 Code associated with the stepper motor and arduino
 
 
-## Background info
+## Background Info
 
 To run this code, you must first have the Arduino IDE downloaded onto 
 your machine.  If you're using the computer in Jack's lab near the 
@@ -12,7 +12,7 @@ If for some reason the Arduino IDE is not installed, use this link:
 https://www.arduino.cc/en/software
 
 
-## Opening the file
+## Opening the File
 
 Double clicking on the file should automatically open the Arduino IDE.
 If this doesn't happen, click on the Arduino icon to manually open the IDE.
@@ -27,7 +27,7 @@ can edit/upload/verify the code.
 
 
 
-## Understanding the code
+## Understanding the Code
 
 Anything labelled `int` means it can be assigned to an integer
 Anything labelled `float` means it can be assigned to a float
@@ -64,11 +64,11 @@ Step: Value for the step counter.  Each half step of the motor corresponds to 0.
 
 ccwCount: Number of times the motor has stepped counterclockwise (used for 
 determining when the motor has turned the set number of counterclockwise rotations).
-*SHOULD REMAIN 0*
+*Should remain 0*
 
 cwCount: Number of times the motor has stepped counter clockwise (used for 
 determining when the motor has turned the set number of clockwise rotations).
-*SHOULD REMAIN 0*
+*Should remain 0*
 
 ccwStep: Number of times the user wants the motor to step counterclockwise/
 
@@ -114,7 +114,7 @@ is what tells the motor what to do (tells the motor to rotate cw)
 
 
 
-## Setting up the board/computer
+## Setting Up the Board/Computer
 
 First make sure that your arduino is connected to the computer via usb.
 Then make sure "Board:" is assigned to "'Arduino Uno'".
@@ -129,7 +129,7 @@ port, especially if you're unplugging and plugging back in the board a lot.
 
 
 
-## Using the code
+## Using the Code
 
 (IF MANUAL IS SET TO TRUE, SKIP STEP 1)
 1. Change the values of `ccwStep` and `cwStep` to the desired 
