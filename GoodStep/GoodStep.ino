@@ -31,7 +31,7 @@ float cwCount = 0; // Number of times the motor has stepped clockwise
 float ccwStep = 100; // Number of times the user wants the motor to step counter clockwise
 float cwStep = 1500; // Number of times the user wants the motor to step clockwise
 // Note: 180 steps per rotation
-bool manual = false; // Set to false if you want to make the motor turn a set number of steps.
+bool manual = true; // Set to false if you want to make the motor turn a set number of steps.
 bool list[8][4] = {
     {HIGH,LOW,LOW,LOW},
     {HIGH,HIGH,LOW,LOW},
@@ -106,7 +106,7 @@ void loop() {
   Serial.print("Force: ");
   Serial.print(units, 10);
   Serial.print(" N");
-  Serial.print("Steps:");
+  // Serial.print("Steps:");
 //  Serial.print(" calibration_factor: ");
 //  Serial.print(calibration_factor);
   Serial.println();
@@ -168,9 +168,9 @@ void ccwRotation(){
     delay(delayTime);
     
     // Serial.print("Steps:");
-    stepCount+=Step;
-    ccwCount+=Step;
-    Serial.println(stepCount);
+    stepCount += Step;
+    ccwCount += Step;
+//    Serial.println(stepCount);
     i++;
     if(i == 7){
       i = 0;
@@ -191,9 +191,9 @@ void cwRotation(){
     delay(delayTime);
     
     // Serial.print("Steps:");
-    stepCount-=Step;
-    cwCount+=Step;
-    Serial.println(stepCount);
+    stepCount -= Step;
+    cwCount += Step;
+    // Serial.println(stepCount);
     i++;
     if(i == 7){
       i = 0;
