@@ -44,6 +44,7 @@ bool list[8][4] = {
     };
 
 void setup() {
+
   Serial.begin(9600); // initialize the serial port (for printing the number of Steps)
   
   // Initializing all of the pins with the Arduino
@@ -63,9 +64,28 @@ void setup() {
   functions do is under the methods portion of:  
   https://www.arduino.cc/reference/en/libraries/Stepper/
   */
+
+  scale.begin(DOUT, CLK);
+  scale.set_scale(calibration_factor); //Adjust to this calibration factor
+  scale.tare();  //Reset the scale to 0
+  Serial.begin(9600);
+  Serial.println("HX711 calibration sketch");
+  Serial.println("Remove all weight from scale");
+  Serial.println("Press T to tare");
+  Serial.println("After readings begin, place known weight on scale");
+  Serial.println("Press + or a to increase calibration factor");
+  Serial.println("Press - or z to decrease calibration factor");
+
+
+
+  //  long zero_factor = scale.read_average(); //Get a baseline reading
+  //  Serial.print("Zero factor: "); //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
+  //  Serial.println(zero_factor);
 }
 
 void loop() {
+
+  // Motor loop
   if(digitalRead(ccwPin) == LOW){
     ccwRotation(); // Rotate motor counter clockwise
   }
@@ -74,6 +94,41 @@ void loop() {
   }
   else if(digitalRead(resetSteps) == LOW){
     stepCount = 0; // Reset step count to zero
+  }
+
+  // Load cell loop
+  Serial.print("Reading ");
+  units = scale.get_units(), 5;
+  if (units < 0)
+  {
+    units = 0.00;
+  }
+  Serial.print("Force: ");
+  Serial.print(units, 10);
+  Serial.print(" N");
+  Serial.print("Steps:");
+//  Serial.print(" calibration_factor: ");
+//  Serial.print(calibration_factor);
+  Serial.println();
+  delay(50);
+
+  // commands to type into serial monitor for calibration
+
+  if (Serial.available())
+  {
+    char temp = Serial.read(); //to adjust zero
+    if (temp == 't' || temp == 'T') //Type in
+      scale.tare();  //Resets the scale to zero
+  }
+
+
+  if (Serial.available())
+  {
+    char temp = Serial.read(); //to adjust calibration factor
+    if (temp == '+' || temp == 'a') //Type in
+      calibration_factor += 1;
+    else if (temp == '-' || temp == 'z') //Type in
+      calibration_factor -= 1;
   }
 }
 
@@ -112,7 +167,7 @@ void ccwRotation(){
     digitalWrite(motorPin1, list[i][3]);
     delay(delayTime);
     
-    Serial.print("Steps:");
+    // Serial.print("Steps:");
     stepCount+=Step;
     ccwCount+=Step;
     Serial.println(stepCount);
@@ -135,7 +190,7 @@ void cwRotation(){
     digitalWrite(motorPin1, list[i][0]);
     delay(delayTime);
     
-    Serial.print("Steps:");
+    // Serial.print("Steps:");
     stepCount-=Step;
     cwCount+=Step;
     Serial.println(stepCount);
