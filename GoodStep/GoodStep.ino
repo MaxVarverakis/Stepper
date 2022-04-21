@@ -69,12 +69,12 @@ void setup() {
   scale.set_scale(calibration_factor); //Adjust to this calibration factor
   scale.tare();  //Reset the scale to 0
   Serial.begin(9600);
-  Serial.println("HX711 calibration sketch");
-  Serial.println("Remove all weight from scale");
-  Serial.println("Press T to tare");
-  Serial.println("After readings begin, place known weight on scale");
-  Serial.println("Press + or a to increase calibration factor");
-  Serial.println("Press - or z to decrease calibration factor");
+  // Serial.println("HX711 calibration sketch");
+  // Serial.println("Remove all weight from scale");
+  // Serial.println("Press T to tare");
+  // Serial.println("After readings begin, place known weight on scale");
+  // Serial.println("Press + or a to increase calibration factor");
+  // Serial.println("Press - or z to decrease calibration factor");
 
 
 
@@ -97,7 +97,7 @@ void loop() {
   }
 
   // Load cell loop
-  Serial.print("Reading ");
+  // Serial.print("Reading ");
   units = scale.get_units(), 5;
   if (units < 0)
   {
@@ -105,7 +105,7 @@ void loop() {
   }
   Serial.print("Force: ");
   Serial.print(units, 10);
-  Serial.print(" N");
+  // Serial.print(" N");
   // Serial.print("Steps:");
 //  Serial.print(" calibration_factor: ");
 //  Serial.print(calibration_factor);
