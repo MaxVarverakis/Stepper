@@ -14,6 +14,8 @@ https://www.arduino.cc/en/software
 
 ## Opening the File
 
+### File location on Jacks' Lab computer is: `/c/Users/csmuser/Stepper`
+
 Double clicking on the file should automatically open the Arduino IDE.
 If this doesn't happen, click on the Arduino icon to manually open the IDE.
 The IDE can be accessed diretly either in the taskbar (dock) or from file searcher.
