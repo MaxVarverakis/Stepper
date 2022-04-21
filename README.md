@@ -16,6 +16,12 @@ https://www.arduino.cc/en/software
 
 ### File location on Jacks' Lab computer is: `/c/Users/csmuser/Stepper`
 
+### To update the files from the github:
+    - Open Git Bash (application)
+    - Use `cd /path/to/file` to get to directory where the file lives
+    - Use `ls` to ensure that the two files that show up are the README and GoodStep folder
+    - Type `git pull`
+
 Double clicking on the file should automatically open the Arduino IDE.
 If this doesn't happen, click on the Arduino icon to manually open the IDE.
 The IDE can be accessed diretly either in the taskbar (dock) or from file searcher.
