@@ -6,6 +6,7 @@ Stepper myStepper(StepsPerRevolution, 8, 10, 9, 11);*/
 
 #include <Arduino.h> // Not needed if using standard Arduino IDE
 #include "HX711.h"
+
 #define DOUT  A0
 #define CLK  A1
 
@@ -85,6 +86,9 @@ void setup() {
 
 void loop() {
 
+  // Load cell loop
+  force();
+
   // Motor loop
   if(digitalRead(ccwPin) == LOW){
     ccwRotation(); // Rotate motor counter clockwise
@@ -95,8 +99,11 @@ void loop() {
   else if(digitalRead(resetSteps) == LOW){
     stepCount = 0; // Reset step count to zero
   }
+  
+}
 
-  // Load cell loop
+float force(){
+  // Function to throw into loop for load cell
   // Serial.print("Reading ");
   units = scale.get_units(), 5;
   if (units < 0)
@@ -107,10 +114,10 @@ void loop() {
   Serial.print(units, 10);
   // Serial.print(" N");
   // Serial.print("Steps:");
-//  Serial.print(" calibration_factor: ");
-//  Serial.print(calibration_factor);
+  //  Serial.print(" calibration_factor: ");
+  //  Serial.print(calibration_factor);
   Serial.println();
-  delay(50);
+//  delay(50);
 
   // commands to type into serial monitor for calibration
 
@@ -130,6 +137,8 @@ void loop() {
     else if (temp == '-' || temp == 'z') //Type in
       calibration_factor -= 1;
   }
+  
+  return units;
 }
 
 bool Condition(String x){
