@@ -6,6 +6,7 @@ Stepper myStepper(StepsPerRevolution, 8, 10, 9, 11);*/
 
 #include <Arduino.h> // Not needed if using standard Arduino IDE
 #include "HX711.h"
+#include "string.h"
 
 #define DOUT  A0
 #define CLK  A1
@@ -86,9 +87,6 @@ void setup() {
 
 void loop() {
 
-  // Load cell loop
-  force();
-
   // Motor loop
   if(digitalRead(ccwPin) == LOW){
     ccwRotation(); // Rotate motor counter clockwise
@@ -100,66 +98,69 @@ void loop() {
     stepCount = 0; // Reset step count to zero
   }
   
+  // Load cell loop
+  measure();
+
 }
 
-float force(){
+float measure(){
   // Function to throw into loop for load cell
   // Serial.print("Reading ");
   units = scale.get_units(), 5;
-  if (units < 0)
-  {
-    units = 0.00;
-  }
+  // if (units < 0)
+  // {
+  //   units = 0.00;
+  // }
   Serial.print("Force: ");
-  Serial.print(units, 10);
+  Serial.println(units, 10);
   // Serial.print(" N");
   // Serial.print("Steps:");
   //  Serial.print(" calibration_factor: ");
   //  Serial.print(calibration_factor);
-  Serial.println();
+  // Serial.println();
 //  delay(50);
 
   // commands to type into serial monitor for calibration
 
-  if (Serial.available())
-  {
-    char temp = Serial.read(); //to adjust zero
-    if (temp == 't' || temp == 'T') //Type in
-      scale.tare();  //Resets the scale to zero
-  }
+  // if (Serial.available())
+  // {
+  //   char temp = Serial.read(); //to adjust zero
+  //   if (temp == 't' || temp == 'T') //Type in
+  //     scale.tare();  //Resets the scale to zero
+  // }
 
 
-  if (Serial.available())
-  {
-    char temp = Serial.read(); //to adjust calibration factor
-    if (temp == '+' || temp == 'a') //Type in
-      calibration_factor += 1;
-    else if (temp == '-' || temp == 'z') //Type in
-      calibration_factor -= 1;
-  }
+  // if (Serial.available())
+  // {
+  //   char temp = Serial.read(); //to adjust calibration factor
+  //   if (temp == '+' || temp == 'a') //Type in
+  //     calibration_factor += 1;
+  //   else if (temp == '-' || temp == 'z') //Type in
+  //     calibration_factor -= 1;
+  // }
   
-  return units;
+  // return units;
 }
 
-bool Condition(String x){
+bool Condition(char x){
 /* Function that determines if the rotation functions should use manual mode. 
   *Args: "ccw" or "cw" depending on which rotation function is using the Condition.
   *Returns bool
 This shouldn't need to be used, as it is already implemented in the 
 rotation functions. */
   if(manual == false){
-    if(x == "ccw"){
+    if(strcmp(x, "ccw") == 0){
       return (ccwCount < ccwStep);   
     }
-    else if(x == "cw"){
+    else if(strcmp(x, "cw") == 0){
       return (cwCount < cwStep);  
     }
   }
   else if(manual == true){
-    if(x == "ccw"){
+    if(strcmp(x, "ccw") == 0){
       return (digitalRead(ccwPin) == LOW);
     }
-    else if(x == "cw"){
+    else if(strcmp(x, "cw") == 0){
       return (digitalRead(cwPin) == LOW);
     }
   }
@@ -167,8 +168,9 @@ rotation functions. */
 
 void ccwRotation(){
 
+  char x = "ccw";
   int i = 0;
-  while(Condition("ccw")){
+  while(Condition(x)){
     
     digitalWrite(motorPin4, list[i][0]);
     digitalWrite(motorPin3, list[i][1]);
@@ -180,6 +182,9 @@ void ccwRotation(){
     stepCount += Step;
     ccwCount += Step;
 //    Serial.println(stepCount);
+
+    measure();
+
     i++;
     if(i == 7){
       i = 0;
@@ -190,8 +195,9 @@ void ccwRotation(){
 
 void cwRotation(){
 
+  char x = "cw";
   int i = 0;
-  while(Condition("cw")){
+  while(Condition(x)){
     
     digitalWrite(motorPin4, list[i][3]);
     digitalWrite(motorPin3, list[i][2]);
@@ -203,6 +209,9 @@ void cwRotation(){
     stepCount -= Step;
     cwCount += Step;
     // Serial.println(stepCount);
+
+    measure();
+
     i++;
     if(i == 7){
       i = 0;
