@@ -50,7 +50,7 @@ char ccw[4] = "ccw", cw[3] = "cw";
 
 void setup() {
 
-  Serial.begin(9600); // initialize the serial port (for printing the number of Steps)
+  Serial.begin(19200); // initialize the serial port (for printing the number of Steps)
 
   // Initializing all of the pins with the Arduino
   pinMode(motorPin1, OUTPUT);
@@ -73,7 +73,6 @@ void setup() {
   scale.begin(DOUT, CLK);
   scale.set_scale(calibration_factor); //Adjust to this calibration factor
   scale.tare();  //Reset the scale to 0
-  Serial.begin(9600);
   // Serial.println("HX711 calibration sketch");
   // Serial.println("Remove all weight from scale");
   // Serial.println("Press T to tare");
@@ -114,15 +113,15 @@ float measure() {
   // {
   //   units = 0.00;
   // }
-//  Serial.print("Force: ");
+  Serial.print("Force: ");
   Serial.println(units, 10);
+  // delay(50);
   
   // Serial.print(" N");
   // Serial.print("Steps:");
   //  Serial.print(" calibration_factor: ");
   //  Serial.print(calibration_factor);
   // Serial.println();
-  //  delay(50);
 
   // commands to type into serial monitor for calibration
 
@@ -148,8 +147,8 @@ float measure() {
 
 bool Condition(char *x) {
   /* Function that determines if the rotation functions should use manual mode.
-     Args: "ccw" or "cw" depending on which rotation function is using the Condition.
-     Returns bool
+      Args: "ccw" or "cw" depending on which rotation function is using the Condition.
+      Returns: bool
     This shouldn't need to be used, as it is already implemented in the
     rotation functions. */
 //  int ccwBool = strcmp(x, ccw), cwBool = strcmp(x, cw);
@@ -188,7 +187,7 @@ void ccwRotation() {
     // Serial.print("Steps:");
     stepCount += Step;
     ccwCount += Step;
-//    Serial.println(stepCount);
+    // Serial.println(stepCount);
 
     measure();
 
@@ -216,7 +215,7 @@ void cwRotation() {
     // Serial.print("Steps:");
     stepCount -= Step;
     cwCount += Step;
-//     Serial.println(stepCount);
+    // Serial.println(stepCount);
 
     measure();
 
