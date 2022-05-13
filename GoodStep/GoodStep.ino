@@ -50,7 +50,7 @@ char ccw[4] = "ccw", cw[3] = "cw";
 
 void setup() {
 
-  Serial.begin(19200); // initialize the serial port (for printing the number of Steps)
+  Serial.begin(115200); // initialize the serial port (for printing the number of Steps)
 
   // Initializing all of the pins with the Arduino
   pinMode(motorPin1, OUTPUT);
@@ -115,7 +115,7 @@ float measure() {
   // }
   Serial.print("Force: ");
   Serial.println(units, 10);
-  // delay(50);
+//  delay(50);
   
   // Serial.print(" N");
   // Serial.print("Steps:");
