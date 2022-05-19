@@ -67,7 +67,7 @@ void setup() {
     code to initialize the motor pins with the arduino.  This allows the user to utilize the functions
     "myStepper" followed by ".Stepper()", ".setSpeed()", and ".Step()".  Documentation for what these
     functions do is under the methods portion of:
-    https://www.arduino.cc/reference/en/libraries/Stepper/
+    https://www.arduino.cc/reference/en/libraries/stepper/
   */
 
   scale.begin(DOUT, CLK);
