@@ -5,19 +5,19 @@
   Stepper myStepper(StepsPerRevolution, 8, 10, 9, 11);*/
 
 #include <Arduino.h> // Not needed if using standard Arduino IDE
-#include "HX711.h"
+// #include "HX711.h"
 //#include "string.h"
 //#include <string> // for string class
 //using namespace std;
 
-#define DOUT  A0
-#define CLK  A1
+// #define DOUT  A0
+// #define CLK  A1
 
-HX711 scale;
+// HX711 scale;
 
 // Load cell initialization
-float calibration_factor = 200000; // this calibration factor must be adjusted according to your load cell
-float units;
+// float calibration_factor = 200000; // this calibration factor must be adjusted according to your load cell
+// float units;
 
 // Motor initialization
 int motorPin1 = 8;
@@ -33,7 +33,7 @@ float Step = .5;
 float ccwCount = 0; // Number of times the motor has stepped counter clockwise
 float cwCount = 0; // Number of times the motor has stepped clockwise
 float ccwStep = 100; // Number of times the user wants the motor to step counter clockwise
-float cwStep = 1500; // Number of times the user wants the motor to step clockwise
+float cwStep = 100; // Number of times the user wants the motor to step clockwise
 // Note: 180 steps per rotation
 bool manual = true; // Set to false if you want to make the motor turn a set number of steps.
 bool list[8][4] = {
@@ -50,7 +50,7 @@ char ccw[4] = "ccw", cw[3] = "cw";
 
 void setup() {
 
-  Serial.begin(115200); // initialize the serial port (for printing the number of Steps)
+  Serial.begin(19200); // initialize the serial port (for printing the number of Steps)
 
   // Initializing all of the pins with the Arduino
   pinMode(motorPin1, OUTPUT);
@@ -70,9 +70,9 @@ void setup() {
     https://www.arduino.cc/reference/en/libraries/stepper/
   */
 
-  scale.begin(DOUT, CLK);
-  scale.set_scale(calibration_factor); //Adjust to this calibration factor
-  scale.tare();  //Reset the scale to 0
+  // scale.begin(DOUT, CLK);
+  // scale.set_scale(calibration_factor); //Adjust to this calibration factor
+  // scale.tare();  //Reset the scale to 0
   // Serial.println("HX711 calibration sketch");
   // Serial.println("Remove all weight from scale");
   // Serial.println("Press T to tare");
@@ -101,20 +101,15 @@ void loop() {
   }
 
   // Load cell loop
-  measure();
+  // measure();
 
 }
 
-float measure() {
+// float measure() {
   // Function to throw into loop for load cell
-  // Serial.print("Reading ");
-  units = scale.get_units(), 5;
-  // if (units < 0)
-  // {
-  //   units = 0.00;
-  // }
-  Serial.print("Force: ");
-  Serial.println(units, 10);
+  // units = scale.get_units(), 5;
+  // Serial.print("Force: ");
+  // Serial.println(units, 10);
 //  delay(50);
   
   // Serial.print(" N");
@@ -143,7 +138,7 @@ float measure() {
   // }
 
   // return units;
-}
+// }
 
 bool Condition(char *x) {
   /* Function that determines if the rotation functions should use manual mode.
@@ -184,10 +179,10 @@ void ccwRotation() {
     digitalWrite(motorPin1, list[i][3]);
     delay(delayTime);
 
-    // Serial.print("Steps:");
+    Serial.print("Steps:");
     stepCount += Step;
     ccwCount += Step;
-    // Serial.println(stepCount);
+    Serial.println(stepCount);
 
     measure();
 
@@ -212,10 +207,10 @@ void cwRotation() {
     digitalWrite(motorPin1, list[i][0]);
     delay(delayTime);
 
-    // Serial.print("Steps:");
+    Serial.print("Steps:");
     stepCount -= Step;
     cwCount += Step;
-    // Serial.println(stepCount);
+    Serial.println(stepCount);
 
     measure();
 
