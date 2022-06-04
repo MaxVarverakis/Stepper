@@ -27,11 +27,11 @@ void setup(){
 
 void loop(){
     if (digitalRead(ccwPin) == LOW) {
-        myStepper.step(-10)
+        // myStepper.step(-10);
         // measure();
     }
     else if (digitalRead(cwPin) == LOW) {
-        myStepper.step(10)
+        // myStepper.step(10);
         // measure();
     }
 
