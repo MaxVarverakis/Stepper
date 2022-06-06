@@ -184,7 +184,7 @@ void ccwRotation() {
     ccwCount += Step;
     Serial.println(stepCount);
 
-    measure();
+//    measure();
 
     i++;
     if (i == 7) {
@@ -212,7 +212,7 @@ void cwRotation() {
     cwCount += Step;
     Serial.println(stepCount);
 
-    measure();
+//    measure();
 
     i++;
     if (i == 7) {
